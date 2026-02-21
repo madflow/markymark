@@ -2,7 +2,7 @@ module github.com/madflow/markymark
 
 go 1.23.0
 
-require github.com/gomarkdown/markdown v0.0.0-20231222211730-1d6d20845b47
+require github.com/gomarkdown/markdown v0.0.0-20260217112301-37c66b85d6ab
 
 require (
 	github.com/a-h/templ v0.3.977
