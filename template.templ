@@ -1,0 +1,219 @@
+package main
+
+templ cssReset() {
+	<style type="text/css">
+  /* CSS Reset for Markdown Preview */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 2rem;
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  /* Typography Reset */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1a1a1a;
+  }
+  
+  h1 { font-size: 2em; border-bottom: 2px solid #eaecef; padding-bottom: 0.3em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+  h3 { font-size: 1.25em; }
+  h4 { font-size: 1em; }
+  h5 { font-size: 0.875em; }
+  h6 { font-size: 0.85em; color: #6a737d; }
+  
+  p {
+    margin-bottom: 1em;
+  }
+  
+  /* Lists Reset */
+  ul, ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+  }
+  
+  ul { list-style-type: disc; }
+  ol { list-style-type: decimal; }
+  
+  li { margin-bottom: 0.25em; }
+  
+  li > ul, li > ol {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+  
+  /* Code Reset */
+  code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.85em;
+    background-color: rgba(27, 31, 35, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+  }
+  
+  pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    padding: 1em;
+    overflow-x: auto;
+    margin-bottom: 1em;
+  }
+  
+  pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9em;
+  }
+  
+  /* Links Reset */
+  a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Blockquote Reset */
+  blockquote {
+    margin: 0 0 1em;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+  
+  blockquote > :first-child { margin-top: 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  
+  /* Table Reset */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+    overflow: auto;
+    display: block;
+  }
+  
+  th, td {
+    padding: 0.5em 1em;
+    border: 1px solid #dfe2e5;
+    text-align: left;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #f6f8fa;
+  }
+  
+  tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  
+  /* Horizontal Rule Reset */
+  hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 1.5em 0;
+    background-color: #e1e4e8;
+    border: 0;
+  }
+  
+  /* Image Reset */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+  }
+  
+  /* Strong and Em Reset */
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  
+  /* Task List Reset */
+  input[type="checkbox"] {
+    margin-right: 0.5em;
+  }
+  
+  /* Definition List Reset */
+  dl {
+    margin-bottom: 1em;
+  }
+  
+  dt {
+    font-weight: 600;
+    margin-top: 1em;
+  }
+  
+  dd {
+    margin-left: 2em;
+  }
+  </style>
+}
+
+templ css() {
+	<style type="text/css">
+  /* Additional custom styles */
+  body {
+    min-height: 100vh;
+  }
+  </style>
+}
+
+templ headerComponent(title string) {
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{ title }</title>
+		@cssReset()
+		@css()
+	</head>
+}
+
+templ bodyComponent(body string) {
+	<body>
+		@templ.Raw(body)
+	</body>
+}
+
+templ reloadScript() {
+	<script>
+    (function() {
+      var es = new EventSource('/__reload');
+      es.onmessage = function() { location.reload(); };
+      es.onerror = function() {
+        es.close();
+        setTimeout(function() { location.reload(); }, 1000);
+      };
+    })();
+  </script>
+}
+
+templ TemplatePage(title string, body string, watchMode bool) {
+	<!DOCTYPE html>
+	<html>
+		@headerComponent(title)
+		@bodyComponent(body)
+		if watchMode {
+			@reloadScript()
+		}
+	</html>
+}
