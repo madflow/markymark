@@ -21,5 +21,8 @@ watch: ## Watch templ files and regenerate automatically
 check: ## Run linter
 	golangci-lint run
 
+fix: ## Run fix
+	go fix ./...
+
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-12s %s\n", $$1, $$2}'
