@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -14,9 +15,15 @@ import (
 
 func main() {
 	var watchMode bool
+	var port int
 	flag.BoolVar(&watchMode, "watch", false, "Watch the markdown file and reload the browser on changes")
 	flag.BoolVar(&watchMode, "w", false, "Watch the markdown file and reload the browser on changes (shorthand)")
+	flag.IntVar(&port, "port", 3000, "Port to serve on")
+	flag.IntVar(&port, "p", 3000, "Port to serve on (shorthand)")
 	flag.Parse()
+	if port < 1 || port > 65535 {
+		log.Fatalf("invalid port %d: must be between 1 and 65535", port)
+	}
 
 	filePath := resolveFilePath()
 
@@ -48,7 +55,8 @@ func main() {
 	doc := markdown.Parse(initialContent)
 	allowedImages := markdown.ExtractRelativeImages(doc)
 
-	server.New(componentFn, baseDir, allowedImages, watchMode, absPath).Start("localhost:3000")
+	addr := fmt.Sprintf("localhost:%d", port)
+	server.New(componentFn, baseDir, allowedImages, watchMode, absPath).Start(addr)
 }
 
 func resolveFilePath() string {

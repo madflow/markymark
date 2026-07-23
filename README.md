@@ -49,9 +49,12 @@ markymark path/to/file.md
 
 # Auto-detect README.md in the current directory
 markymark
+
+# Serve on a custom port
+markymark --port 8080 path/to/file.md
 ```
 
-MarkyMark starts a local server at `http://localhost:3000` and opens it in your default browser automatically.
+MarkyMark starts a local server at `http://localhost:3000` by default and opens it in your default browser automatically. Use `-p` / `--port` to choose a different port.
 
 ### Watch mode
 
@@ -69,4 +72,4 @@ markymark -w
 | Flag      | Shorthand | Default | Description                                            |
 | --------- | --------- | ------- | ------------------------------------------------------ |
 | `--watch` | `-w`      | `false` | Watch the file for changes and auto-reload the browser |
-
+| `--port`  | `-p`      | `3000`  | Port for the local server                              |
