@@ -22,6 +22,8 @@ github.com/gomarkdown/markdown v0.0.0-20260614204949-e08cff860f76 h1:Ltt9ldIaSYE
 github.com/gomarkdown/markdown v0.0.0-20260614204949-e08cff860f76/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
 github.com/gomarkdown/markdown v0.0.0-20260725000948-8435af3f5984 h1:6DE2PprLLZelQJu7AeebZLxjcENwC1plRZHDvd5uMCU=
 github.com/gomarkdown/markdown v0.0.0-20260725000948-8435af3f5984/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
+github.com/gomarkdown/markdown v0.0.0-20260824154242-13c5cf49db8d h1:8VtgBGEPLZ2Yn0Fuh6Pwmy3qF6indeaqy8mrBMbUKRQ=
+github.com/gomarkdown/markdown v0.0.0-20260824154242-13c5cf49db8d/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c h1:+mdjkGKdHQG3305AYmdv1U2eRNDiU2ErMBj1gwrq8eQ=
